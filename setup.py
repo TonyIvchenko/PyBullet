@@ -63,7 +63,6 @@ import distutils.ccompiler
 distutils.ccompiler.CCompiler.compile = parallelCCompile
 
 #see http://stackoverflow.com/a/8719066/295157
-import os
 
 platform = get_platform()
 print(platform)
