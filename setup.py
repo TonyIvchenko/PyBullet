@@ -90,7 +90,7 @@ include_dirs = []
 try:
   import numpy
   NP_DIRS = [numpy.get_include()]
-except:
+except ImportError:
   print("numpy is disabled. getCameraImage maybe slower.")
 else:
   print("numpy is enabled.")
