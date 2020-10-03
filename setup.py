@@ -55,7 +55,11 @@ def parallelCCompile(self,
 
   # convert to list, imap is evaluated on-demand
   pool = multiprocessing.pool.ThreadPool(N)
-  list(pool.imap(_single_compile, objects))
+  try:
+    list(pool.imap(_single_compile, objects))
+  finally:
+    pool.close()
+    pool.join()
   return objects
 
 
