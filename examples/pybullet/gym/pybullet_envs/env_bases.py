@@ -7,11 +7,8 @@ from pybullet_utils import bullet_client
 
 from pkg_resources import parse_version
 
-try:
-  if os.environ["PYBULLET_EGL"]:
-    import pkgutil
-except:
-  pass
+if os.environ.get("PYBULLET_EGL"):
+  import pkgutil
 
 class MJCFBaseBulletEnv(gym.Env):
   """
@@ -60,7 +57,7 @@ class MJCFBaseBulletEnv(gym.Env):
       self._p.setPhysicsEngineParameter(deterministicOverlappingPairs=1)
       #optionally enable EGL for faster headless rendering
       try:
-        if os.environ["PYBULLET_EGL"]:
+        if os.environ.get("PYBULLET_EGL"):
           con_mode = self._p.getConnectionInfo()['connectionMethod']
           if con_mode==self._p.DIRECT:
             egl = pkgutil.get_loader('eglRenderer')
@@ -68,7 +65,7 @@ class MJCFBaseBulletEnv(gym.Env):
               self._p.loadPlugin(egl.get_filename(), "_eglRendererPlugin")
             else:
               self._p.loadPlugin("eglRendererPlugin")
-      except:
+      except Exception:
         pass
       self.physicsClientId = self._p._client
       self._p.configureDebugVisualizer(pybullet.COV_ENABLE_GUI, 0)
