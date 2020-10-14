@@ -263,7 +263,7 @@ class QuadrupedStablePD(object):
     return pose
 
   def computePDForces(self, desiredPositions, desiredVelocities, maxForces):
-    if desiredVelocities == None:
+    if desiredVelocities is None:
       desiredVelocities = [0] * self._totalDofs
 
     taus = self._stablePD.computePD(bodyUniqueId=self._sim_model,
