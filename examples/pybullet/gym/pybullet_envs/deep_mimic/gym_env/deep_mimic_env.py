@@ -216,7 +216,7 @@ class HumanoidDeepBulletEnv(gym.Env):
     self._cam_dist = 3
     self._cam_pitch = 0.3
     self._cam_yaw = 0
-    if (not self._p == None):
+    if self._p is not None:
       view_matrix = self._p.computeViewMatrixFromYawPitchRoll(
         cameraTargetPosition=base_pos,
         distance=self._cam_dist,
